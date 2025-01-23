@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
           <h2>Transaction Successful!</h2>
           <p>Transaction recorded successfully for <strong>$name</strong>.</p>
           <p>Amount withdraw GHC: <strong>$amount</strong>. New balance GHC: <strong>$newBalance</strong>.</p>
-          <a href='index.php' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
+          <a href='index.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
       </div>";
       
             }
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
           <h2>Transaction failed!</h2>
           <p>Insufficient balance for withdrawal. .</p>
 
-          <a href='index.php' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
+          <a href='index.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
       </div>";
                 $pdo->rollBack();
                 

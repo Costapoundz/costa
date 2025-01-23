@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             <h2>Transaction Successful!</h2>
             <p>Transaction recorded successfully for <strong>$name</strong>.</p>
             <p>Amount deposited: <strong>$amount</strong>. New balance: <strong>$newBalance</strong>.</p>
-            <a href='index.php' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
+            <a href='index.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
         </div>";
     } catch (Exception $e) {
         // Rollback transaction on error
