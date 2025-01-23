@@ -42,14 +42,66 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         // Commit the transaction
         $pdo->commit();
 
-        // Display success message and button to redirect
+        // Display success message with styled background and form
         echo "
-        <div style='text-align: center; margin-top: 50px;'>
-            <h2>Transaction Successful!</h2>
-            <p>Transaction recorded successfully for <strong>$name</strong>.</p>
-            <p>Amount deposited Gh₵: <strong>$amount</strong>. New balance Gh₵: <strong>$newBalance</strong>.</p>
-            <a href='index.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
-        </div>";
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Transaction Successful</title>
+            <style>
+                body {
+                    background: url('img/po.jpeg') no-repeat center center fixed;
+                    background-size: cover;
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    margin: 0;
+                    padding: 0;
+                }
+                .container {
+                    margin-top: 100px;
+                    padding: 20px;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    border-radius: 10px;
+                    display: inline-block;
+                }
+                a, button {
+                    display: inline-block;
+                    margin-top: 20px;
+                    padding: 10px 20px;
+                    background-color: #4CAF50;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    border: none;
+                    cursor: pointer;
+                }
+                button:hover, a:hover {
+                    background-color: #45a049;
+                }
+            </style>
+             <script>
+                        function printTransaction() {
+                            window.print();
+                        }
+                    </script>
+        </head>
+        <body>
+            <div class='container'>
+                <h2>Transaction Successful!</h2>
+                <p>Transaction recorded successfully for <strong>$name</strong>.</p>
+                <p>Amount deposited: Gh₵ <strong>$amount</strong></p>
+                <p>New balance: Gh₵ <strong>$newBalance</strong></p>
+                  <button class='print-btn' onclick='printTransaction()'>Print Transaction</button>
+                        <form action='index.html' method='GET'>
+                           
+                <form action='index.html' method='GET'>
+                    <button type='submit'>Go to Home</button>
+                </form>
+            </div>
+        </body>
+        </html>";
     } catch (Exception $e) {
         // Rollback transaction on error
         $pdo->rollBack();

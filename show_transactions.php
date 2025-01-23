@@ -60,21 +60,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         th {
             background-color: #f4f4f4;
         }
-        a {
-            display: inline-block;
+        .actions {
+            text-align: center;
             margin-top: 20px;
+        }
+        .actions a, .actions button {
+            margin: 5px;
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
             text-decoration: none;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+        }
+        .actions button:hover, .actions a:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <h2>Transaction Management</h2>
-    <div style="text-align: center;">
+
+    <!-- Navigation -->
+    <div class="actions">
         <a href="index.html">Go to Home</a>
+        <button onclick="window.print()">Print</button>
     </div>
 
     <!-- Filter Form -->
@@ -118,8 +129,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p style="text-align: center; margin-top: 20px;">No transactions found.</p>
     <?php endif; ?>
 
-    <div style="text-align: center;">
+    <div class="actions">
         <a href="index.html">Go to Home</a>
+        <button onclick="window.print()">Print</button>
     </div>
 </body>
 </html>
