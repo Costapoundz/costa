@@ -33,11 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
+            background: url('img/po.jpeg') no-repeat center center fixed;
+            background-size: cover;
             font-family: Arial, sans-serif;
             margin: 20px;
         }
         h2 {
             text-align: center;
+            color: #fff;
             margin-bottom: 20px;
         }
         .filter-form {
@@ -51,6 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
         }
         th, td {
             padding: 10px;
@@ -58,7 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: left;
         }
         th {
-            background-color: #f4f4f4;
+            background-color: #4CAF50;
+            color: white;
         }
         .actions {
             text-align: center;
@@ -77,61 +84,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .actions button:hover, .actions a:hover {
             background-color: #45a049;
         }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
-    <h2>Transaction Management</h2>
+    <div class="container">
+        <h2>Transaction Management</h2>
 
-    <!-- Navigation -->
-    <div class="actions">
-        <a href="index.html">Go to Home</a>
-        <button onclick="window.print()">Print</button>
-    </div>
+        <!-- Navigation -->
+        <div class="actions">
+            <a href="index.html">Go to Home</a>
+            <button onclick="window.print()">Print</button>
+        </div>
 
-    <!-- Filter Form -->
-    <form method="POST" class="filter-form">
-        <label for="transaction_type">Filter Transactions:</label>
-        <select name="transaction_type" id="transaction_type" class="form-select d-inline w-auto">
-            <option value="All" <?= $filter === "All" ? "selected" : "" ?>>All</option>
-            <option value="Deposit" <?= $filter === "Deposit" ? "selected" : "" ?>>Deposit</option>
-            <option value="Withdraw" <?= $filter === "Withdraw" ? "selected" : "" ?>>Withdraw</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </form>
+        <!-- Filter Form -->
+        <form method="POST" class="filter-form">
+            <label for="transaction_type">Filter Transactions:</label>
+            <select name="transaction_type" id="transaction_type" class="form-select d-inline w-auto">
+                <option value="All" <?= $filter === "All" ? "selected" : "" ?>>All</option>
+                <option value="Deposit" <?= $filter === "Deposit" ? "selected" : "" ?>>Deposit</option>
+                <option value="Withdraw" <?= $filter === "Withdraw" ? "selected" : "" ?>>Withdraw</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
 
-    <!-- Transactions Table -->
-    <?php if (!empty($transactions)): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Staff ID</th>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Transaction Type</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($transactions as $transaction): ?>
+        <!-- Transactions Table -->
+        <?php if (!empty($transactions)): ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($transaction['id']) ?></td>
-                        <td><?= htmlspecialchars($transaction['staff_id']) ?></td>
-                        <td><?= htmlspecialchars($transaction['name']) ?></td>
-                        <td><?= htmlspecialchars($transaction['amount']) ?></td>
-                        <td><?= htmlspecialchars($transaction['transaction_type']) ?></td>
-                        <td><?= htmlspecialchars($transaction['created_at']) ?></td>
+                        <th>ID</th>
+                        <th>Staff ID</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Transaction Type</th>
+                        <th>Date</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p style="text-align: center; margin-top: 20px;">No transactions found.</p>
-    <?php endif; ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($transactions as $transaction): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($transaction['id']) ?></td>
+                            <td><?= htmlspecialchars($transaction['staff_id']) ?></td>
+                            <td><?= htmlspecialchars($transaction['name']) ?></td>
+                            <td>Gh₵ <?= htmlspecialchars($transaction['amount']) ?></td>
+                            <td><?= htmlspecialchars($transaction['transaction_type']) ?></td>
+                            <td><?= htmlspecialchars($transaction['created_at']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p style="text-align: center; margin-top: 20px;">No transactions found.</p>
+        <?php endif; ?>
 
-    <div class="actions">
-        <a href="index.html">Go to Home</a>
-        <button onclick="window.print()">Print</button>
+        <div class="actions">
+            <a href="index.html">Go to Home</a>
+            <button onclick="window.print()">Print</button>
+        </div>
     </div>
 </body>
 </html>
