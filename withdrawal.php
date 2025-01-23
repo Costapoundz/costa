@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                 $stmt = $pdo->prepare("INSERT INTO transactions (staff_id, name, amount, transaction_type) VALUES (?, ?, ?, 'withdrawal')");
         $stmt->execute([$staff_id, $name, $amount]);
                 $pdo->commit();
-                echo "$amount withdrawn successfully. Current balance: $newBalance";
+                echo "$amount withdrawn successfully. Current balance Gh₵: $newBalance";
 
                  // Display success message and button to redirect
       echo "

@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         <div style='text-align: center; margin-top: 50px;'>
             <h2>Transaction Successful!</h2>
             <p>Transaction recorded successfully for <strong>$name</strong>.</p>
-            <p>Amount deposited: <strong>$amount</strong>. New balance: <strong>$newBalance</strong>.</p>
+            <p>Amount deposited Gh₵: <strong>$amount</strong>. New balance Gh₵: <strong>$newBalance</strong>.</p>
             <a href='index.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
         </div>";
     } catch (Exception $e) {

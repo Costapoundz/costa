@@ -73,6 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h2>Transaction Management</h2>
+    <div style="text-align: center;">
+        <a href="index.html">Go to Home</a>
+    </div>
 
     <!-- Filter Form -->
     <form method="POST" class="filter-form">
