@@ -33,11 +33,16 @@
         h1, p {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
+       
     </style>
 </head>
 <body>
 <div class="container text-center mt-5">
     <h1 class="mb-4">Welcome</h1>
+    <div>
+        <form action="logout.php" method="POST">
+            <button type="submit" name="show_transactions" class="btn btn-primary">logout</button>
+        </form>
     <p class="lead mb-5">Please select an action to proceed:</p>
     <div class="d-flex justify-content-center gap-5">
         <form action="register.html" method="GET">
@@ -60,6 +65,8 @@
             <input type="hidden" name="action" value="check_balance">
             <button type="submit" class="btn btn-warning action-btn">check balance</button>
         </form>
+    </div>
+    
     </div>
 </div>
 </body>
