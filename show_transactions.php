@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filter = $_POST['transaction_type'] ?? "All";
 
     try {
-        if ($filter === "Deposit" || $filter === "Withdraw") {
+        if ($filter === "Deposit" || $filter === "Withdrawal") {
             // Fetch transactions based on the selected filter
             $stmt = $pdo->prepare("SELECT * FROM transactions WHERE transaction_type = ? ORDER BY id DESC");
             $stmt->execute([$filter]);
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <select name="transaction_type" id="transaction_type" class="form-select d-inline w-auto">
                 <option value="All" <?= $filter === "All" ? "selected" : "" ?>>All</option>
                 <option value="Deposit" <?= $filter === "Deposit" ? "selected" : "" ?>>Deposit</option>
-                <option value="Withdraw" <?= $filter === "Withdraw" ? "selected" : "" ?>>Withdraw</option>
+                <option value="Withdrawal" <?= $filter === "Withdrawal" ? "selected" : "" ?>>Withdrawal</option>
             </select>
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
