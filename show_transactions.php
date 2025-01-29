@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
+    // If not logged in, redirect to the login page
+    header('Location: index.html');
+    exit;
+}
 require "db.php";
 
 $transactions = [];
@@ -113,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Navigation -->
         <div class="actions">
-            <a href="dashboard.html">Go to Home</a>
+            <a href="dashboard.php">Go to Home</a>
             <button onclick="window.print()">Print</button>
         </div>
 

@@ -1,6 +1,21 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
+    // If not logged in, redirect to the login page
+    header('Location: index.html');
+    exit;
+}
+
+// User is logged in, display dashboard content
+echo "Welcome to the Dashboard, " . htmlspecialchars($_SESSION['name']) . "!";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banking System - Select Action</title>
@@ -92,5 +107,6 @@
     setTimeout(preventBack, 0);
     window.onunload = function () { window.history.forward(); };
 </script>
+
 </body>
 </html>

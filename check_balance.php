@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
+    // If not logged in, redirect to the login page
+    header('Location: index.html');
+    exit;
+}
 require 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
@@ -64,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
                     <p><strong>User:</strong> " . htmlspecialchars($user['name']) . "</p>
                     <p><strong>Balance:</strong> Gh₵ " . htmlspecialchars($user['balance']) . "</p>
                     <button onclick='printContent()'>Print</button>
-                    <form action='dashboard.html' method='GET'>
+                    <form action='dashboard.php' method='GET'>
                         <button type='submit'>Go to Home</button>
                     </form>
                 </div>

@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['user_id'] = $user['id']; // Assuming user table has an 'id' column
 
             // Redirect to home page
-            header("Location: dashboard.html");
+            header("Location: dashboard.php");
             exit;
         } else {
             // Invalid index
