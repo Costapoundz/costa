@@ -28,11 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['user_id'] = $user['id']; // Assuming user table has an 'id' column
 
             // Redirect to home page
-            header("Location: index.html");
+            header("Location: dashboard.html");
             exit;
         } else {
-            // Invalid login
-            echo "<script>alert('Invalid username or password.'); window.location.href = 'login.html';</script>";
+            // Invalid index
+            echo "<script>alert('Invalid username or password.'); window.location.href = 'index.html';</script>";
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <head>
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>Login Failed</title>
+                <title>login Failed</title>
                 <style>
                     body {
                         background: url('img/y.jpeg') no-repeat center center fixed;
@@ -82,9 +82,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <body>
                 <div class='container'>
                     <h2>Invalid username or password</h2>
-                    <form action='login.html' method='GET'>
+                    <form action='index.html' method='GET'>
                         <button type='submit'>Go to Home</button>
                     </form>
                 </div>
             </body>
             </html>
+
+
+

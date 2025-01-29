@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             <h2>Registered Successful!</h2>
             <p>User <strong> $name </strong> registered successfully..</p>
             <p>Staff ID: <strong> $staff_id </strong>.</p>
-            <a href='index.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
+            <a href='dashboard.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
         </div>";
     } else {
        
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             <h2>Registered Successful!</h2>
             <p>User <strong>$staff_id </strong>  is already registered..</p>
     
-            <a href='index.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
+            <a href='dashboard.html' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
         </div>";
         
         

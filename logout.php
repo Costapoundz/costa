@@ -8,8 +8,8 @@ session_unset();
 // Destroy the session
 session_destroy();
 
-// Redirect the user to the login page or homepage
-header("Location: login.html"); // Replace 'login.php' with your desired location
+// Redirect the user to the index page or homepage
+header("Location: index.html"); // Replace 'index.php' with your desired location
 exit;
 ?>
 <script>

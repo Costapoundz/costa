@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Navigation -->
         <div class="actions">
-            <a href="index.html">Go to Home</a>
+            <a href="dashboard.html">Go to Home</a>
             <button onclick="window.print()">Print</button>
         </div>
 

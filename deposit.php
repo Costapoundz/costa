@@ -94,9 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                 <p>Amount deposited: Gh₵ <strong>$amount</strong></p>
                 <p>New balance: Gh₵ <strong>$newBalance</strong></p>
                   <button class='print-btn' onclick='printTransaction()'>Print Transaction</button>
-                        <form action='index.html' method='GET'>
+                        <form action='dashboard.html' method='GET'>
                            
-                <form action='index.html' method='GET'>
+                <form action='dashboard.html' method='GET'>
                     <button type='submit'>Go to Home</button>
                 </form>
             </div>

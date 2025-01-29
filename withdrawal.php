@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                         <p>Amount withdrawn: GHC <strong>$amount</strong></p>
                         <p>New balance: GHC <strong>$newBalance</strong></p>
                         <button class='print-btn' onclick='printTransaction()'>Print Transaction</button>
-                        <form action='index.html' method='GET'>
+                        <form action='dashboard.html' method='GET'>
                             <button type='submit'>Go to Home</button>
                         </form>
                     </div>
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                 <div style='text-align: center; margin-top: 50px;'>
                     <h2>Transaction Failed!</h2>
                     <p>Insufficient balance for withdrawal.</p>
-                    <a href='index.html'>Go to Home</a>
+                    <a href='dashboard.html'>Go to Home</a>
                 </div>";
                 $pdo->rollBack();
             }

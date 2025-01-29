@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
                     <p><strong>User:</strong> " . htmlspecialchars($user['name']) . "</p>
                     <p><strong>Balance:</strong> Gh₵ " . htmlspecialchars($user['balance']) . "</p>
                     <button onclick='printContent()'>Print</button>
-                    <form action='index.html' method='GET'>
+                    <form action='dashboard.html' method='GET'>
                         <button type='submit'>Go to Home</button>
                     </form>
                 </div>
