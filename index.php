@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Please enter your username and password.";
         exit;
     }
+    
 
     try {
         // Fetch user data, including the plain text password

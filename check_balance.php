@@ -9,6 +9,9 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
 }
 require 'db.php';
 
+
+
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
     $staff_id = $_POST["staff_id"] ?? '';
 

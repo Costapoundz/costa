@@ -7,6 +7,8 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
     header('Location: index.html');
     exit;
 }
+
+
 // Include the database connection file
 require 'db.php';
 

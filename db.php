@@ -12,6 +12,7 @@ $password = "";            // Replace with your database password
 // $password = "gr@S@v1ng$"; 
 
 
+
 try {
     $pdo= new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     // Set the PDO error mode to exception

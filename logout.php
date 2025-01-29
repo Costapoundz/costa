@@ -12,6 +12,8 @@ session_destroy();
 header("Location: index.html"); // Replace 'index.php' with your desired location
 exit;
 ?>
+
+
 <script>
     window.history.forward(); // Prevents going back immediately
 
