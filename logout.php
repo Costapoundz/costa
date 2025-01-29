@@ -12,3 +12,16 @@ session_destroy();
 header("Location: login.html"); // Replace 'login.php' with your desired location
 exit;
 ?>
+<script>
+    window.history.forward(); // Prevents going back immediately
+
+    function preventBack() {
+        window.history.forward();
+    }
+
+    setTimeout(preventBack, 0);
+
+    window.onunload = function () {
+        window.history.forward();
+    };
+</script>

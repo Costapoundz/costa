@@ -3,20 +3,48 @@ require "db.php";
 
 $transactions = [];
 $filter = "All"; // Default filter
+$monthFilter = "All"; // Default month filter
+$searchStaffId = ""; // Default search for staff ID (empty)
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filter = $_POST['transaction_type'] ?? "All";
+    $monthFilter = $_POST['transaction_month'] ?? "All";
+    $searchStaffId = $_POST['search_staff_id'] ?? ""; // Capture the search term for staff ID
 
     try {
-        if ($filter === "Deposit" || $filter === "Withdrawal") {
-            // Fetch transactions based on the selected filter
-            $stmt = $pdo->prepare("SELECT * FROM transactions WHERE transaction_type = ? ORDER BY id DESC");
-            $stmt->execute([$filter]);
-        } else {
-            // Fetch all transactions if no filter is selected
-            $stmt = $pdo->query("SELECT * FROM transactions ORDER BY id DESC");
+        // Build the base query
+        $query = "SELECT * FROM transactions WHERE 1"; // Default condition (SELECT all)
+
+        // Add conditions based on filters
+        if ($filter !== "All") {
+            $query .= " AND transaction_type = ?";
+        }
+        
+        if ($monthFilter !== "All") {
+            $query .= " AND MONTH(created_at) = ?";
         }
 
+        if (!empty($searchStaffId)) {
+            $query .= " AND staff_id LIKE ?"; // Filter by staff ID
+        }
+
+        // Prepare the query
+        $stmt = $pdo->prepare($query);
+
+        // Bind parameters
+        $params = [];
+        if ($filter !== "All") {
+            $params[] = $filter;
+        }
+        if ($monthFilter !== "All") {
+            $params[] = $monthFilter;
+        }
+        if (!empty($searchStaffId)) {
+            $params[] = "%" . $searchStaffId . "%"; // Use LIKE for partial matching
+        }
+
+        // Execute the query with the parameters
+        $stmt->execute($params);
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
         echo "<p style='color: red; text-align: center;'>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
@@ -103,49 +131,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Filter Form -->
         <form method="POST" class="filter-form">
-            <label for="transaction_type">Filter Transactions:</label>
+            <label for="transaction_type">Filter by Type:</label>
             <select name="transaction_type" id="transaction_type" class="form-select d-inline w-auto">
                 <option value="All" <?= $filter === "All" ? "selected" : "" ?>>All</option>
                 <option value="Deposit" <?= $filter === "Deposit" ? "selected" : "" ?>>Deposit</option>
                 <option value="Withdrawal" <?= $filter === "Withdrawal" ? "selected" : "" ?>>Withdrawal</option>
             </select>
+
+            <label for="transaction_month">Filter by Month:</label>
+            <select name="transaction_month" id="transaction_month" class="form-select d-inline w-auto">
+                <option value="All" <?= $monthFilter === "All" ? "selected" : "" ?>>All</option>
+                <option value="01" <?= $monthFilter === "01" ? "selected" : "" ?>>January</option>
+                <option value="02" <?= $monthFilter === "02" ? "selected" : "" ?>>February</option>
+                <option value="03" <?= $monthFilter === "03" ? "selected" : "" ?>>March</option>
+                <option value="04" <?= $monthFilter === "04" ? "selected" : "" ?>>April</option>
+                <option value="05" <?= $monthFilter === "05" ? "selected" : "" ?>>May</option>
+                <option value="06" <?= $monthFilter === "06" ? "selected" : "" ?>>June</option>
+                <option value="07" <?= $monthFilter === "07" ? "selected" : "" ?>>July</option>
+                <option value="08" <?= $monthFilter === "08" ? "selected" : "" ?>>August</option>
+                <option value="09" <?= $monthFilter === "09" ? "selected" : "" ?>>September</option>
+                <option value="10" <?= $monthFilter === "10" ? "selected" : "" ?>>October</option>
+                <option value="11" <?= $monthFilter === "11" ? "selected" : "" ?>>November</option>
+                <option value="12" <?= $monthFilter === "12" ? "selected" : "" ?>>December</option>
+            </select>
+
+            <label for="search_staff_id">Search by Staff ID:</label>
+            <input type="text" name="search_staff_id" id="search_staff_id" class="form-control d-inline w-auto" placeholder="Enter staff ID" value="<?= htmlspecialchars($searchStaffId) ?>">
+
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
 
-        <!-- Transactions Table -->
-        <?php if (!empty($transactions)): ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Staff ID</th>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Transaction Type</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <!-- Transaction Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Staff ID</th>
+                    <th>User</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($transactions)): ?>
                     <?php foreach ($transactions as $transaction): ?>
                         <tr>
                             <td><?= htmlspecialchars($transaction['id']) ?></td>
                             <td><?= htmlspecialchars($transaction['staff_id']) ?></td>
                             <td><?= htmlspecialchars($transaction['name']) ?></td>
-                            <td>Gh₵ <?= htmlspecialchars($transaction['amount']) ?></td>
                             <td><?= htmlspecialchars($transaction['transaction_type']) ?></td>
+                            <td><?= htmlspecialchars($transaction['amount']) ?></td>
                             <td><?= htmlspecialchars($transaction['created_at']) ?></td>
                         </tr>
                     <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p style="text-align: center; margin-top: 20px;">No transactions found.</p>
-        <?php endif; ?>
-
-        <div class="actions">
-            <a href="index.html">Go to Home</a>
-            <button onclick="window.print()">Print</button>
-        </div>
+                <?php else: ?>
+                    <tr><td colspan="6" style="text-align:center;">No transactions found</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
+ 
