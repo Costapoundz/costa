@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('img/i.png');
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+        }
+        input[type="text"], input[type="number"], input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .logo {
+            width: 80px;
+            height: auto;
+        }
+        @media print {
+            body {
+                background: none;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .logo {
+                width: 60px;
+            }
+            .btn, a {
+                display: none; /* Hide buttons and links when printing */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href='dashboard.php' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Go to Home</a>
+    </div>
+    <div class="container">
+        <img src="img/i.png" alt="GRACW Logo" class="logo">
+        <h2>GRA</h2>
+        <h2>GHANA REVENUE AUTHORITY CLEANERS WELFARE</h2>
+        <h2>(GRACW)</h2>
+        <h2>MEMBERSHIP LOAN APPLICATION FORM</h2>
+
+        <!-- Correct Form -->
+        <form id="loanForm">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Phone:</label>
+                <input type="text" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Staff ID:</label>
+                <input type="text" name="staff_id" required>
+            </div>
+            <div class="form-group">
+                <label>District:</label>
+                <input type="text" name="district" required>
+            </div>
+            <div class="form-group">
+                <label>Rank:</label>
+                <input type="text" name="rank" required>
+            </div>
+            <div class="form-group">
+                <label>Amount Applied:</label>
+                <input type="number" name="amount_applied" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Amount in words:</label>
+                <input type="text" name="amount_in_words" required> <!-- Fixed typo here -->
+            </div>
+            <div class="form-group">
+                <label>Loan Date:</label>
+                <input type="date" name="loan_date" required>
+            </div>
+            <div class="form-group">
+                <label>Momo No:</label>
+                <input type="text" name="momo_no">
+            </div>
+            <div class="form-group">
+                <label>Cheque No:</label>
+                <input type="text" name="cheque_no">
+            </div>
+            <div class="form-group">
+                <label>Received By:</label>
+                <input type="text" name="received_by">
+            </div>
+            <div class="form-group">
+                <label>Date Received:</label>
+                <input type="date" name="date_received">
+            </div>
+            <div class="form-group">
+                <label>Signature of Applicant:</label>
+                <input type="text" name="signature">
+            </div>
+            <div class="form-group">
+                <label>Financial Secretary Remarks:</label>
+                <input type="text" name="remarks">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    <!-- JavaScript to Handle Form Submission and Trigger Print -->
+    <script>
+        document.getElementById('loanForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // You can add form validation or data processing here if needed
+
+            window.print(); // Trigger the print preview
+        });
+    </script>
+</body>
+</html>

@@ -4,8 +4,6 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
     // If not logged in, redirect to the login page
-
-    
     header('Location: index.html');
     exit;
 }
@@ -17,7 +15,6 @@ echo "Welcome to the Dashboard, " . htmlspecialchars($_SESSION['name']) . "!";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banking System - Select Action</title>
@@ -29,7 +26,7 @@ echo "Welcome to the Dashboard, " . htmlspecialchars($_SESSION['name']) . "!";
         body {
             background: url('img/gra.jpg') no-repeat center center fixed;
             background-size: cover;
-            color:white;
+            color: white;
         }
 
         .action-btn {
@@ -43,6 +40,7 @@ echo "Welcome to the Dashboard, " . htmlspecialchars($_SESSION['name']) . "!";
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s, box-shadow 0.2s;
             color: white;
+            margin: 10px; /* Added margin for spacing */
         }
 
         .action-btn:hover {
@@ -62,6 +60,14 @@ echo "Welcome to the Dashboard, " . htmlspecialchars($_SESSION['name']) . "!";
                 font-size: 1.2rem;
             }
         }
+
+        /* Center the buttons */
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px; /* Added gap for spacing */
+        }
     </style>
 </head>
 <body>
@@ -69,37 +75,30 @@ echo "Welcome to the Dashboard, " . htmlspecialchars($_SESSION['name']) . "!";
     <h1 class="mb-4">Welcome</h1>
     
     <form action="logout.php" method="POST">
-        <button type="submit" name="show_transactions" class="btn btn-danger mb-3">Logout</button>
+        <button type="submit" class="btn btn-danger mb-3">Logout</button>
     </form>
 
     <p class="lead mb-4">Please select an action to proceed:</p>
     
-    <div class="row g-3">
-        <div class="col-md-4 col-12">
-            <form action="register.html" method="GET">
-                <button type="submit" class="btn btn-primary action-btn w-100">Register</button>
-            </form>
-        </div>
-        <div class="col-md-4 col-12">
-            <form action="deposit.html" method="GET">
-                <button type="submit" class="btn btn-warning action-btn w-100">Deposit</button>
-            </form>
-        </div>
-        <div class="col-md-4 col-12">
-            <form action="withdrawal.html" method="GET">
-                <button type="submit" class="btn btn-warning action-btn w-100">Withdrawal</button>
-            </form>
-        </div>
-        <div class="col-md-4 col-12">
-            <form action="show_transactions.html" method="GET">
-                <button type="submit" class="btn btn-info action-btn w-100">Transactions</button>
-            </form>
-        </div>
-        <div class="col-md-4 col-12">
-            <form action="check_balance.html" method="GET">
-                <button type="submit" class="btn btn-success action-btn w-100">Check Balance</button>
-            </form>
-        </div>
+    <div class="btn-container">
+        <form action="register.html" method="GET">
+            <button type="submit" class="btn btn-primary action-btn">Register</button>
+        </form>
+        <form action="deposit.html" method="GET">
+            <button type="submit" class="btn btn-warning action-btn">Deposit</button>
+        </form>
+        <form action="withdrawal.html" method="GET">
+            <button type="submit" class="btn btn-warning action-btn">Withdrawal</button>
+        </form>
+        <form action="show_transactions.html" method="GET">
+            <button type="submit" class="btn btn-info action-btn">Transactions</button>
+        </form>
+        <form action="check_balance.html" method="GET">
+            <button type="submit" class="btn btn-success action-btn">Check Balance</button>
+        </form>
+        <form action="loans.html" method="GET">
+            <button type="submit" class="btn btn-success action-btn">Loans</button>
+        </form>
     </div>
 </div>
 

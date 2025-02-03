@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- graicon -->
+    <link href="img/i.png" rel="icon">
+
+    <title>Check Balance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Full-page background image */
+        body {
+            background: url('img/y.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: white; /* Make text visible on dark backgrounds */
+        }
+
+        .action-btn {
+            width: 200px;
+            height: 200px;
+            font-size: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: white; /* Button text color */
+            margin: 10px; /* Add margin for spacing */
+        }
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h1, p {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .form-container form {
+            margin: 10px 0;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<a href="dashboard.php" class="btn btn-primary">Back</a>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">LOANS</h1>
+        <!-- <div class="form-container"> -->
+            <!-- <form method="POST" action="show_loans.php"> -->
+                <!-- <button type="submit" name="show_loans" class="btn btn-primary action-btn">Show All Loans</button> -->
+            </form>
+            <form method="POST" action="loans_forms.html">
+                <button type="submit" name="loans_forms" class="btn btn-primary action-btn">Loans Form</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
