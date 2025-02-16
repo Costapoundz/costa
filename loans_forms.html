@@ -65,7 +65,7 @@
                 width: 60px;
             }
             .btn, a {
-                display: none; /* Hide buttons and links when printing */
+                display: none;
             }
         }
     </style>
@@ -81,8 +81,6 @@
         <h2>(GRAFW)</h2>
         <h2>MEMBERSHIP LOAN APPLICATION FORM</h2>
 
-        
-        <!-- Correct Form -->
         <form id="loanForm">
             <div class="form-group">
                 <label>Name:</label>
@@ -110,7 +108,7 @@
             </div>
             <div class="form-group">
                 <label>Amount in words:</label>
-                <input type="text" name="amount_in_words" required> <!-- Fixed typo here -->
+                <input type="text" name="amount_in_words" required>
             </div>
             <div class="form-group">
                 <label>Loan Date:</label>
@@ -141,19 +139,30 @@
                 <input type="text" name="remarks">
             </div>
 
-            <!-- Submit Button -->
             <button type="submit" class="btn">Submit</button>
         </form>
     </div>
 
-    <!-- JavaScript to Handle Form Submission and Trigger Print -->
     <script>
         document.getElementById('loanForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault();
+            
+            let formData = new FormData(this);
 
-            // You can add form validation or data processing here if needed
-
-            window.print(); // Trigger the print preview
+            fetch('save_loan.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Loan application saved successfully!');
+                    window.print(); // Trigger the print preview
+                } else {
+                    alert('Error saving data: ' + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
