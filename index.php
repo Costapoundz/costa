@@ -11,28 +11,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Please enter your username and password.";
         exit;
     }
-    
 
     try {
-        // Fetch user data, including the plain text password
-        $stmt = $pdo->prepare("SELECT id, name, password FROM user WHERE name = :name AND password = :password");
-        $stmt->execute([
-            'name' => $name,
-            'password' => $password  // Direct comparison (NOT recommended for real security)
-        ]);
+        // Fetch user data, including role
+        $stmt = $pdo->prepare("SELECT id, name, password, role FROM user WHERE name = :name");
+        $stmt->execute(['name' => $name]);
         
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user) {
-            // Store user data in session
+        // Verify user exists and password is correct
+        if ($user && $user['password'] === $password) { // NOTE: Use password_hash() for real security
             $_SESSION['name'] = $user['name'];
-            $_SESSION['user_id'] = $user['id']; // Assuming user table has an 'id' column
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['role'] = $user['role']; // Store role in session
 
-            // Redirect to home page
-            header("Location: dashboard.php");
+            // Redirect based on role
+            if ($user['role'] === 'admin') {
+                header("Location:admin/admin_dashboard.php");
+            } else {
+                header("Location: dashboard.php");
+            }
             exit;
         } else {
-            // Invalid index
             echo "<script>alert('Invalid username or password.'); window.location.href = 'index.html';</script>";
         }
     } catch (PDOException $e) {
@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 
 
             <!DOCTYPE html>
