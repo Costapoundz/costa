@@ -25,6 +25,10 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered Users</title>
+
+    <div>
+        <button class ="btn btn-primary" onclick="window.location.href='register.html'">Back</button>
+    </div>
     <style>
         body {
             background: url('img/y.jpeg') no-repeat center center fixed;

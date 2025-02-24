@@ -31,16 +31,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $staff_id = trim($_POST['staff_id'] ?? '');
 
     if (!empty($name) && !empty($staff_id)) {
+        // Fetch the current user data
+        $stmt = $pdo->prepare("SELECT name FROM table_1 WHERE id = ?");
+        $stmt->execute([$id]);
+        $currentUser = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($currentUser && $currentUser['name'] !== $name) {
+            // Insert name change into username_changes table
+            $logStmt = $pdo->prepare("INSERT INTO username_changes (user_id, old_name, new_name, changed_by) VALUES (?, ?, ?, ?)");
+            $logStmt->execute([$id, $currentUser['name'], $name, $_SESSION['user_id']]);
+        }
+    
+        // Update the user record
         $stmt = $pdo->prepare("UPDATE table_1 SET name = ?, staff_id = ? WHERE id = ?");
         if ($stmt->execute([$name, $staff_id, $id])) {
-            $showModal = true; // Show modal when update is successful
+            $showModal = true; // Show success modal
         } else {
             $message = "<p style='color: red; text-align: center;'>Failed to update user.</p>";
         }
-    } else {
-        $message = "<p style='color: red; text-align: center;'>All fields are required.</p>";
     }
-}
+}   
 ?>
 
 <!DOCTYPE html>
