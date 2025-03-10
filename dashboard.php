@@ -90,7 +90,7 @@ $totalBalance = $row['total_balance'] ?? 0;
     <!-- Balance Section -->
     <div class="balance-box">
         <h3>Current Balance</h3>
-        <h2 class="balance-text text-dark">₵<?php echo number_format($totalBalance, 2); ?></h2>
+        <h2 class="balance-text text-danger">₵<?php echo number_format($totalBalance, 2); ?></h2>
     </div>
 
     <p class="lead mb-4">Please select an action to proceed:</p>
