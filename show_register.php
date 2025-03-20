@@ -1,11 +1,9 @@
- 
 <?php
 session_start();
 require 'db.php'; // Adjust path if needed
 
-
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
-    header('Location:index.html');
+    header('Location: index.html');
     exit();
 }
 
@@ -25,10 +23,6 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered Users</title>
-
-    <div>
-        <button class ="btn btn-primary" onclick="window.location.href='register.html'">Back</button>
-    </div>
     <style>
         body {
             background: url('img/y.jpeg') no-repeat center center fixed;
@@ -70,9 +64,18 @@ try {
             text-decoration: none;
             border-radius: 5px;
         }
+        .delete-btn {
+            color: red;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <div>
+    <button onclick="window.location.href='dashboard.php'" class="btn-back" >BACK</button>
+    </div>
     <div class="container">
         <h2>Registered Users</h2>
         <table>
@@ -81,6 +84,7 @@ try {
                 <th>Name</th>
                 <th>Staff ID</th>
                 <th>Action</th>
+                <th>Delete</th>
             </tr>
             <?php foreach ($users as $user): ?>
             <tr>
@@ -88,6 +92,12 @@ try {
                 <td><?= htmlspecialchars($user['name']) ?></td>
                 <td><?= htmlspecialchars($user['staff_id']) ?></td>
                 <td><a href="edit_register.php?id=<?= $user['id'] ?>" style="color: blue;">Edit</a></td>
+                <td>
+                    <form action="delete_user.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </td>
             </tr>
             <?php endforeach; ?>
         </table>

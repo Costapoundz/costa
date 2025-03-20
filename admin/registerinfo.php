@@ -30,6 +30,7 @@ $nameChanges = $stmt->fetchAll(PDO::FETCH_ASSOC);
         th { background-color: #4CAF50; color: white; }
     </style>
 </head>
+
 <body>
     <h2>Name Change History</h2>
     <table>
