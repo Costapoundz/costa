@@ -74,8 +74,12 @@ try {
 </head>
 <body>
     <div>
-    <button onclick="window.location.href='dashboard.php'" class="btn-back" >BACK</button>
-    </div>
+    <button  onclick="window.location.href='dashboard.php'" 
+        class="btn-back" 
+        style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+    BACK
+</button>
+
     <div class="container">
         <h2>Registered Users</h2>
         <table>
