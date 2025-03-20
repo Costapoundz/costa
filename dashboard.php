@@ -87,12 +87,7 @@ $totalBalance = $row['total_balance'] ?? 0;
         <button type="submit" class="btn btn-danger mb-3">Logout</button>
     </form>
 
-    <!-- Balance Section -->
-    <div class="balance-box">
-        <h3>Current Balance</h3>
-        <h2 class="balance-text text-danger">₵<?php echo number_format($totalBalance, 2); ?></h2>
-    </div>
-
+    
     <p class="lead mb-4">Please select an action to proceed:</p>
 
     <!-- Action Buttons -->
@@ -109,11 +104,14 @@ $totalBalance = $row['total_balance'] ?? 0;
         <form action="show_transactions.html" method="GET">
             <button type="submit" class="btn btn-info action-btn">Transactions</button>
         </form>
-        <form action="check_balance.html" method="GET">
+        <!-- <form action="check_balance.html" method="GET">
             <button type="submit" class="btn btn-success action-btn">Check Balance</button>
-        </form>
+        </form> -->
         <form action="loans.html" method="GET">
             <button type="submit" class="btn btn-success action-btn">Loans</button>
+        </form>
+        <form action="balance.php" method="GET">
+            <button type="submit" class="btn btn-success action-btn">total Balance</button>
         </form>
     </div>
 </div>
