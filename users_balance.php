@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
         body {
             background: url('img/y.jpeg') no-repeat center center fixed;
             background-size: cover;
-            color: white;
+            font-family: Arial, sans-serif;
         }
         
 

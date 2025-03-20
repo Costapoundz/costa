@@ -1,5 +1,4 @@
 <?php
-
 require 'db.php';
 session_start();
 
@@ -30,6 +29,11 @@ $totalBalance = $row['total_balance'] ?? 0;
             margin: 0;
             background-color: #f8f8f8;
             font-family: Arial, sans-serif;
+            background-image: url('img/i.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
         }
         .balance-box {
             text-align: center;
@@ -41,13 +45,13 @@ $totalBalance = $row['total_balance'] ?? 0;
             margin-bottom: 20px; /* Space between balance and button */
         }
         .balance-text {
-            color: red;
+            color: black;
             font-size: 24px;
             font-weight: bold;
         }
         .btn {
             padding: 10px 20px;
-            background-color: #007BFF;
+            background-color: black;
             color: white;
             border: none;
             border-radius: 5px;
@@ -56,9 +60,10 @@ $totalBalance = $row['total_balance'] ?? 0;
             transition: 0.3s;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color:rgb(14, 20, 26);
         }
-    </style>    
+    </style>  
+    <meta http-equiv="refresh" content="10"> <!-- Auto-refresh page every 10 seconds -->  
 </head>
 <body>
 
