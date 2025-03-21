@@ -43,12 +43,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            flex-direction: row; /* Change to row for horizontal alignment */
             margin-top: 20px;
         }
 
         .form-container form {
-            margin: 10px 0;
+            margin: 10px; /* Adjust margin for spacing */
         }
 
         .btn-primary {
@@ -64,17 +64,24 @@
 </head>
 
 <body>
-    <div>
-    <a href="dashboard.php" class="btn btn-primary">Back</a>
-    </div>
+   
     <div class="container mt-5">
         <h1 class="text-center">LOANS</h1>
-         <div class="form-container"> 
-             <form method="POST" action="show_loans.php"> 
-                 <button type="submit" name="show_loans" class="btn btn-primary action-btn">Show All Loans</button> 
+        <div>
+            <a href="dashboard.php" class="btn btn-primary">Back</a>
+        </div>
+        <div class="form-container"> 
+            <form method="POST" action="show_loans.php"> 
+                <button type="submit" name="show_loans" class="btn btn-primary action-btn">Show All Loans</button> 
             </form>
             <form method="POST" action="loans_forms.html">
                 <button type="submit" name="loans_forms" class="btn btn-primary action-btn">Loans Form</button>
+            </form>
+            <form method="POST" action="other_loans.html"> <!-- New form for Other Loans -->
+                <button type="submit" name="other_loans" class="btn btn-primary action-btn">Other Loans</button>
+            </form>
+            <form method="POST" action="view_loans.php"> <!-- New form for Other Loans -->
+                <button type="submit" name="view_loans" class="btn btn-primary action-btn">View Other Loans</button>
             </form>
         </div>
     </div>

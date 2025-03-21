@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Other Loans</title>
+    <style>
+        body {
+            background: url('img/y.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Other Loans</h1>
+    <div>
+        <button class="action-btn btn btn-primary" onclick="window.location.href='loans.html'">back</button>
+    </div>
+        <div class="form-container">
+            <form method="POST" action="process_other_loans.php">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="staff_id" class="form-label">staff id</label>
+                    <input type="text" class="form-control" id="staff_id" name="staff_id" required>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="period" class="form-label">Period of Payment (in months)</label>
+                    <input type="number" class="form-control" id="period" name="period" required>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount loaned</label>
+                    <input type="number"  class="form-control" id="amount" name="amount" required>
+                </div>
+                <div class="mb-3">
+                    <label for="interest" class="form-label">Interest Rate </label>
+                    <input type="number" step="0.01" class="form-control" id="interest" name="interest" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
