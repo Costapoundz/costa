@@ -13,7 +13,6 @@ $stmt = $pdo->query("SELECT SUM(balance) AS total_balance FROM table_1");
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $totalBalance = $row['total_balance'] ?? 0;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
