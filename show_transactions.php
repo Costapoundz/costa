@@ -8,13 +8,16 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
     exit;
 }
 
-
 require "db.php";
 
 $transactions = [];
 $filter = "All"; 
 $monthFilter = "All"; 
 $searchStaffId = ""; 
+
+// Calculate total withdrawal amount
+$withdrawal_stmt = $pdo->query("SELECT COALESCE(SUM(amount), 0) as total_withdrawal FROM transactions WHERE transaction_type = 'Withdrawal'");
+$total_withdrawal = $withdrawal_stmt->fetch(PDO::FETCH_ASSOC)['total_withdrawal'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filter = $_POST['transaction_type'] ?? "All";
@@ -51,6 +54,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->execute($params);
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Recalculate withdrawal total based on filtered results if transaction type is Withdrawal
+        if ($filter === "Withdrawal") {
+            $withdrawal_total_stmt = $pdo->prepare("SELECT COALESCE(SUM(amount), 0) as total_withdrawal FROM transactions WHERE transaction_type = 'Withdrawal'");
+            if ($monthFilter !== "All") {
+                $withdrawal_total_stmt = $pdo->prepare("SELECT COALESCE(SUM(amount), 0) as total_withdrawal FROM transactions WHERE transaction_type = 'Withdrawal' AND MONTH(created_at) = ?");
+                $withdrawal_total_stmt->execute([$monthFilter]);
+            } else {
+                $withdrawal_total_stmt->execute();
+            }
+            $total_withdrawal = $withdrawal_total_stmt->fetch(PDO::FETCH_ASSOC)['total_withdrawal'];
+        }
     } catch (Exception $e) {
         echo "<p style='color: red; text-align: center;'>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
     }
@@ -105,6 +120,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #4CAF50;
             color: white;
         }
+        .withdrawal-total {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .filter-form select, .filter-form input, .filter-form button {
@@ -119,13 +142,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container">
-        <h2>Transaction Management</h2>
-
-        <!-- Navigation -->
-        <div class="actions">
-            <a href="dashboard.php">Go to Home</a>
-            <button onclick="window.print()">Print</button>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="withdrawal-total">
+                    Total Withdrawals: $<?= number_format($total_withdrawal, 2) ?>
+                </div>
+            </div>
+            <div class="col-md-6 text-end">
+                <div class="actions">
+                    <a href="dashboard.php">Go to Home</a>
+                    <button onclick="window.print()">Print</button>
+                </div>
+            </div>
         </div>
+
+        <h2>Transaction Management</h2>
 
         <!-- Filter Form -->
         <form method="POST" class="filter-form row g-2">
