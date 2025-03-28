@@ -67,10 +67,11 @@ foreach ($loans as $loan) {
     $amount = floatval($loan['amount']);
     $period = intval($loan['period']);
     
-    // Calculate total interest over the loan period (simple interest)
-    $interestAmount = ($amount * $interestRate * $period) / (100 * 12); // Monthly simple interest
-    $totalInterest += $interestAmount;
-    $totalAmount += $amount;
+    // Calculate total interest based on percentage only (no period)
+$interestAmount = ($amount * ($interestRate / 100)); 
+$totalInterest += $interestAmount;
+$totalAmount += $amount;
+
 }
 
 // Get unique years from the database for filtering
