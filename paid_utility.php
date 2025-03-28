@@ -116,7 +116,7 @@ $available_years = $years_stmt->fetchAll(PDO::FETCH_COLUMN);
                             <div class="paid-utility">
                                 <strong><?php echo htmlspecialchars($utility['utility_name']); ?></strong>
                                 <br>
-                                $<?php echo number_format($utility['amount'], 2); ?> 
+                                GHC<?php echo number_format($utility['amount'], 2); ?> 
                                 | Paid: <?php echo date('M d, Y H:i', strtotime($utility['paid_at'])); ?>
                             </div>
                         <?php endforeach; ?>

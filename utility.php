@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_paid'])) {
     $stmt->execute([$utility_id]);
 
     // Redirect to prevent form resubmission
-    header("Location: utility_tracker.php");
+    header("Location: utility.php");
     exit();
 }
 
@@ -91,7 +91,7 @@ $unpaid_utilities = $unpaid_stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <div>
                                         <strong><?php echo htmlspecialchars($utility['utility_name']); ?></strong>
                                         <br>
-                                        $<?php echo number_format($utility['amount'], 2); ?> 
+                                        GHC<?php echo number_format($utility['amount'], 2); ?> 
                                         | Due: <?php echo date('M d, Y', strtotime($utility['due_date'])); ?>
                                     </div>
                                     <form method="POST" action="" class="m-0">
