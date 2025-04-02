@@ -7,9 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_utility'])) {
     $utility_name = $_POST['utility_name'];
     $amount = $_POST['amount'];
     $due_date = $_POST['due_date'];
+    $reason = $_POST['reason'];
+    $payment_to = $_POST['payment_to'];
 
-    $stmt = $pdo->prepare("INSERT INTO utilities (utility_name, amount, due_date) VALUES (?, ?, ?)");
-    $stmt->execute([$utility_name, $amount, $due_date]);
+    $stmt = $pdo->prepare("INSERT INTO utilities (utility_name, amount, due_date, reason, payment_to) VALUES (?, ?, ?, ?, ?)");
+    $stmt->execute([$utility_name, $amount, $due_date, $reason, $payment_to]);
+
 }
 
 // Handle marking utility as paid
@@ -74,6 +77,14 @@ $unpaid_utilities = $unpaid_stmt->fetchAll(PDO::FETCH_ASSOC);
                             <input type="number" step="0.01" class="form-control" id="amount" name="amount" required>
                         </div>
                         <div class="mb-3">
+                            <label for="reason" class="form-label">Reason</label>
+                            <input type="text" class="form-control" id="reason" name="reason" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="payment_to" class="form-label">Payment to</label>
+                            <input type="text" class="form-control" id="payment_to" name="payment_to" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="due_date" class="form-label">Due Date</label>
                             <input type="date" class="form-control" id="due_date" name="due_date" required>
                         </div>
@@ -91,6 +102,9 @@ $unpaid_utilities = $unpaid_stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <div>
                                         <strong><?php echo htmlspecialchars($utility['utility_name']); ?></strong>
                                         <br>
+                                        Reason:<?php echo htmlspecialchars($utility['reason']); ?>
+                                        <br>
+                                        Payment to: <?php echo htmlspecialchars($utility['payment_to']); ?>
                                         GHC<?php echo number_format($utility['amount'], 2); ?> 
                                         | Due: <?php echo date('M d, Y', strtotime($utility['due_date'])); ?>
                                     </div>

@@ -57,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
             font-family: Arial, sans-serif;
         }
         
-
         .table-container {
             margin-top: 30px;
             background-color: rgba(255, 255, 255, 0.9);
@@ -79,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
         
-
         #printArea h4 {
             font-size: 20px;
             font-weight: bold;
@@ -91,15 +89,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
             margin: 5px 0;
         }
 
-        /* Center Print Content on Paper */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* Print Styling for Modal Content */
         @media print {
-            body * {
+            body.print-modal * {
                 visibility: hidden;
             }
-            #printArea, #printArea * {
+            body.print-modal #printArea, 
+            body.print-modal #printArea * {
                 visibility: visible;
             }
-            #printArea {
+            body.print-modal #printArea {
                 position: absolute;
                 left: 50%;
                 top: 50%;
@@ -107,6 +113,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
                 width: 300px;
                 padding: 20px;
                 box-shadow: none;
+                border: none;
+            }
+            /* Normal page print - everything remains visible */
+            body.print-page {
+                background: none !important;
+            }
+            body.print-page .table-container {
+                background-color: white !important;
             }
         }
     </style>
@@ -116,10 +130,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
     <div class="container mt-5">
         <h1 class="text-center">Check Your Balance</h1>
         <div>
-    <button  onclick="window.location.href='dashboard.php'" 
-        class="btn-back" 
-        style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Back</button>
-    </div>
+            <button onclick="window.location.href='dashboard.php'" 
+                class="btn-back" 
+                style="background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Back</button>
+        </div>
+        
         <form method="POST" action="" class="mt-4">
             <div class="mb-3">
                 <label for="staff_id" class="form-label">Staff ID:</label>
@@ -127,6 +142,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
             </div>
             <div class="text-center">
                 <button type="submit" name="check_balance" class="btn btn-primary">Check Balance</button>
+            </div>
+            <div class="text-center mt-2">
+                <button type="button" onclick="printPage()" class="btn btn-success">Print</button>
             </div>
         </form>
     </div>
@@ -146,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="printContent()" class="btn btn-success">Print</button>
+                    <button onclick="printModal()" class="btn btn-success">Print</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Close</button>
                 </div>
             </div>
@@ -179,55 +197,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["check_balance"])) {
     <!-- JavaScript for Modal & Print -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function printContent() {
-            const modal = document.getElementById('balanceModal');
-            if (modal.classList.contains('show')) {
-                const printWindow = window.open('', '_blank');
-                const printArea = document.getElementById("printArea").innerHTML;
-
-                printWindow.document.write(`
-                    <html>
-                        <head>
-                            <title>Print Balance</title>
-                            <style>
-                                body {
-                                    font-family: Arial, sans-serif;
-                                    text-align: center;
-                                    padding: 20px;
-                                }
-                                h4 {
-                                    font-size: 20px;
-                                    font-weight: bold;
-                                    margin-bottom: 10px;
-                                }
-                                p {
-                                    font-size: 16px;
-                                    margin: 5px 0;
-                                }
-                            </style>
-                        </head>
-                        <body>
-                            ${printArea}
-                        </body>
-                    </html>
-                `);
-
-                printWindow.document.close();
-                printWindow.print();
-            } else {
-                alert("Please check the balance first to open the modal.");
-            }
+        // Print the entire page
+        function printPage() {
+            document.body.classList.add('print-page');
+            window.print();
+            document.body.classList.remove('print-page');
+        }
+        
+        // Print just the modal content
+        function printModal() {
+            document.body.classList.add('print-modal');
+            window.print();
+            document.body.classList.remove('print-modal');
         }
 
         function closeModal() {
             let modal = document.getElementById('balanceModal');
             let bootstrapModal = bootstrap.Modal.getInstance(modal);
-            bootstrapModal.hide();
+            if (bootstrapModal) {
+                bootstrapModal.hide();
+            }
         }
 
         <?php if ($showModal): ?>
-            let modal = new bootstrap.Modal(document.getElementById('balanceModal'));
-            modal.show();
+            document.addEventListener('DOMContentLoaded', function() {
+                let modal = new bootstrap.Modal(document.getElementById('balanceModal'));
+                modal.show();
+            });
         <?php endif; ?>
     </script>
 </body>
