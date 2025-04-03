@@ -104,15 +104,15 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['name'])) {
         <form action="show_transactions.html" method="GET">
             <button type="submit" class="btn btn-info action-btn">Transactions</button>
         </form>
-       <form action="utility.php" method="GET">
+       <!-- <form action="utility.php" method="GET">
             <button type="submit" class="btn btn-success action-btn">utility</button>
-        </form> 
+        </form>  -->
         <form action="loans.html" method="GET">
             <button type="submit" class="btn btn-success action-btn">Loans</button>
         </form>
-        <form action="balance.php" method="GET">
+        <!-- <form action="balance.php" method="GET">
             <button type="submit" class="btn btn-success action-btn">total Balance</button>
-        </form>
+        </form> -->
     </div>
 </div>
 
