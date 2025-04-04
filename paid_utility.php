@@ -66,18 +66,34 @@ $available_years = $years_stmt->fetchAll(PDO::FETCH_COLUMN);
             margin-bottom: 10px;
             padding: 10px;
         }
+        @media print {
+            body {
+                background: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .utility-container {
+                box-shadow: none !important;
+                border: none !important;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="utility-container">
-                    <h2 class="text-center mb-4">Paid Utilities</h2>
-                    <a href="utility.php" class="btn btn-primary mb-3">Back to Utilities</a>
-                    
+                <div class="utility-container" id="printable-area">
+                    <h2 class="text-center mb-4">Paid Utilities/Claims Forms</h2>
+
+                    <div class="no-print mb-3 d-flex justify-content-between">
+                        <a href="utility.php" class="btn btn-primary">Back to Utilities</a>
+                        <button onclick="printDiv()" class="btn btn-outline-dark">🖨️ Print</button>
+                    </div>
+
                     <!-- Filter Form -->
-                    <form method="GET" action="" class="mb-4">
+                    <form method="GET" action="" class="mb-4 no-print">
                         <div class="row">
                             <div class="col-md-4 mb-2">
                                 <input type="text" name="filter_name" class="form-control" 
@@ -114,11 +130,9 @@ $available_years = $years_stmt->fetchAll(PDO::FETCH_COLUMN);
                         </div>
                         <?php foreach ($paid_utilities as $utility): ?>
                             <div class="paid-utility">
-                                <strong><?php echo htmlspecialchars($utility['utility_name']); ?></strong>
-                                <br>
-                                Reason :<?php echo htmlspecialchars($utility['reason']); ?>
-                                        <br>
-                                        Payment to: <?php echo htmlspecialchars($utility['payment_to']); ?>
+                                <strong><?php echo htmlspecialchars($utility['utility_name']); ?></strong><br>
+                                Reason: <?php echo htmlspecialchars($utility['reason']); ?><br>
+                                Payment to: <?php echo htmlspecialchars($utility['payment_to']); ?><br>
                                 GHC<?php echo number_format($utility['amount'], 2); ?> 
                                 | Paid: <?php echo date('M d, Y H:i', strtotime($utility['paid_at'])); ?>
                             </div>
@@ -128,6 +142,13 @@ $available_years = $years_stmt->fetchAll(PDO::FETCH_COLUMN);
             </div>
         </div>
     </div>
+
+    <!-- Print Script -->
+    <script>
+        function printDiv() {
+            window.print();
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
